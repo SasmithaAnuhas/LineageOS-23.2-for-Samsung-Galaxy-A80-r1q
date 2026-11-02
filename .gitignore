@@ -1,0 +1,17 @@
+# Ignore all archives and binaries from Git tracking
+*.zip
+*.tar
+*.gz
+*.br
+*.img
+*.dat
+*.transfer.list
+
+# Build workspaces and scratch logs
+workspace/
+logs/
+patches/
+
+# OS-specific files
+Thumbs.db
+.DS_Store
