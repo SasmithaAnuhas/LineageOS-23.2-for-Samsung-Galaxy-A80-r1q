@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>LineageOS for Samsung Galaxy A80 (r1q)</title>
+  <meta name="description" content="Download LineageOS 23.2 and upcoming 24 for Samsung Galaxy A80 (r1q / SM-A805F).">
+  <meta name="theme-color" content="#fbf7ef">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="LineageOS for Samsung Galaxy A80 (r1q)">
+  <meta property="og:description" content="LineageOS 23.2 (Android 16) & upcoming LineageOS 24 for Samsung Galaxy A80.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       PixelOS Theme Tokens & Zero-Scroll Strict Viewport Lock
+       ========================================================================== */
+    :root {
+      --bg-canvas: #fbf7ef;
+      --bg-card: #f5eedf;
+      --bg-btn: #f7e6a6;
+      --bg-btn-hover: #fae188;
+      
+      --wave-brown: #c4a179;
+      --wave-mint: #a8cfb7;
+      --wave-yellow: #f5df8b;
+
+      --text-main: #181c19;
+      --text-sub: #545b53;
+      --text-muted: #828a80;
+
+      --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Strict Desktop Viewport Lock - No Scrollbars */
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      max-height: 100vh;
+      overflow: hidden; /* Removes browser scrollbars */
+      font-family: var(--font-family);
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    /* ==========================================================================
+       Background Waves (PixelOS Style)
+       ========================================================================== */
+    .bg-wave-bottom-left {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 32vw;
+      max-width: 440px;
+      height: 36vh;
+      max-height: 340px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-wave-bottom-right {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 38vw;
+      max-width: 500px;
+      height: 44vh;
+      max-height: 440px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ==========================================================================
+       Top Navigation Bar
+       ========================================================================== */
+    .site-header {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 24px 48px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .logo-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #181c19;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.04em;
+    }
+
+    .logo-text {
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-sub);
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    /* ==========================================================================
+       Hero Landing Screen (Exact 1-Page Layout)
+       ========================================================================== */
+    .hero-container {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      max-width: 1360px;
+      margin: 0 auto;
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      align-items: center;
+      padding: 10px 48px;
+      gap: 40px;
+    }
+
+    /* Left Column: Heading, Device subtitle, Download Buttons */
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: 600px;
+    }
+
+    .device-badge-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(24, 28, 25, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      margin-bottom: 20px;
+    }
+
+    .device-badge-chip span.dot {
+      width: 7px;
+      height: 7px;
+      background: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #22c55e;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 4.4vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      color: var(--text-main);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 1.3vw, 1.15rem);
+      color: var(--text-sub);
+      line-height: 1.6;
+      font-weight: 500;
+      margin-bottom: 32px;
+    }
+
+    /* Two Action Buttons (LineageOS 23.2 & 24 Coming Soon) */
+    .hero-buttons-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* Primary Download Button for LineageOS 23.2 */
+    .btn-download-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 36px;
+      background-color: var(--bg-btn);
+      color: #181c19;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 9999px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .btn-download-primary:hover {
+      background-color: var(--bg-btn-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .btn-download-primary svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+    }
+
+    /* Secondary Disabled / Coming Soon Button for LineageOS 24 */
+    .btn-coming-soon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 32px;
+      background-color: rgba(24, 28, 25, 0.06);
+      color: var(--text-sub);
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      border: 1px dashed rgba(0, 0, 0, 0.18);
+      cursor: not-allowed;
+      user-select: none;
+      position: relative;
+    }
+
+    .coming-soon-pill {
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: #e2c5b3;
+      color: #3b281c;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ==========================================================================
+       Right Column: Authentic Samsung Galaxy A80 Hardware Mockup
+       Compact scaled to fit within 100vh with zero overflow
+       ========================================================================== */
+    .hero-right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .a80-device-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 270px;
+      filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.28));
+    }
+
+    /* Top Sliding Housing (Angel Gold metallic finish) */
+    .a80-slider-housing {
+      width: 264px;
+      height: 76px;
+      background: linear-gradient(180deg, #ecd6c9 0%, #e2c5b3 60%, #ceaa94 100%);
+      border-radius: 38px 38px 0 0;
+      border: 2px solid #debca9;
+      border-bottom: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: -16px;
+      z-index: 1;
+      padding-top: 6px;
+      box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.6);
+    }
+
+    /* Rotating Oval Camera Module */
+    .a80-camera-pill {
+      width: 180px;
+      height: 46px;
+      background: linear-gradient(180deg, #181c20 0%, #2a3038 100%);
+      border-radius: 23px;
+      border: 2px solid #5a6473;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 1px 3px rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      padding: 0 14px;
+      position: relative;
+    }
+
+    /* Lens 1: 48MP Main Camera */
+    .lens-48mp {
+      width: 28px;
+      height: 28px;
+      background: #090b0d;
+      border-radius: 7px;
+      border: 1.5px solid #4a5463;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 6px #000;
+      position: relative;
+    }
+
+    .lens-glass {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #2a4365 0%, #0d1520 70%);
+      position: relative;
+    }
+
+    .lens-glass::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Lens 2: 8MP Ultra-Wide */
+    .lens-ultrawide {
+      width: 20px;
+      height: 20px;
+      background: #090b0d;
+      border-radius: 50%;
+      border: 1.5px solid #4a5463;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lens-ultrawide .lens-glass {
+      width: 10px;
+      height: 10px;
+    }
+
+    /* Lens 3: 3D ToF (Depth Sensor) */
+    .lens-tof-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tof-emitter {
+      width: 8px;
+      height: 8px;
+      background: #0a0d10;
+      border-radius: 50%;
+      border: 1px solid #3c4452;
+    }
+
+    .tof-receiver {
+      width: 12px;
+      height: 12px;
+      background: radial-gradient(circle at 35% 35%, #1e2836 0%, #0a0d12 80%);
+      border-radius: 50%;
+      border: 1px solid #4a5463;
+    }
+
+    /* Main Phone Chassis Body */
+    .a80-body {
+      width: 270px;
+      height: 485px;
+      background: linear-gradient(180deg, #ecd6c9 0%, #e2c5b3 50%, #d4b49e 100%);
+      border-radius: 38px;
+      padding: 6px;
+      border: 2px solid #debca9;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* New Infinity Display */
+    .a80-display {
+      width: 100%;
+      height: 100%;
+      background-color: #fbf7ef;
+      border-radius: 32px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 16px 14px;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+    }
+
+    .phone-wallpaper {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .phone-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .phone-status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #3b423a;
+      padding: 0 4px;
+    }
+
+    .phone-clock-widget {
+      margin-top: 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .phone-big-time {
+      font-size: 4.2rem;
+      font-weight: 800;
+      line-height: 0.88;
+      letter-spacing: -0.06em;
+      color: #272d25;
+    }
+
+    .phone-date-pill {
+      margin-top: 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #3f473d;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .a80-screen-indicators {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .sod-indicator {
+      font-size: 0.65rem;
+      color: #545b53;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(4px);
+      padding: 3px 8px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .fod-sensor-glow {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(22, 128, 57, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #168039;
+    }
+
+    .fod-sensor-glow svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .phone-bottom-home {
+      display: flex;
+      justify-content: center;
+      padding-bottom: 2px;
+    }
+
+    .home-indicator {
+      width: 80px;
+      height: 4px;
+      background: #181c19;
+      border-radius: 4px;
+      opacity: 0.6;
+    }
+
+    /* ==========================================================================
+       Bottom Fixed Footer
+       ========================================================================== */
+    .site-footer {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 48px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-left a {
+      color: var(--text-sub);
+      text-decoration: none;
+    }
+
+    .footer-left a:hover {
+      color: var(--text-main);
+    }
+
+    .footer-social-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .social-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-main);
+      background: rgba(0, 0, 0, 0.04);
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .social-btn:hover {
+      background: rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .social-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 960px) {
+      html, body {
+        height: auto;
+        max-height: none;
+        overflow-y: auto; /* Fallback to scroll only on small screens/phones */
+      }
+      .site-header { padding: 20px; }
+      .nav-links { display: none; }
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 24px 20px;
+        gap: 28px;
+      }
+      .hero-left {
+        align-items: center;
+        margin: 0 auto;
+      }
+      .site-footer {
+        padding: 20px;
+        flex-direction: column;
+        gap: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Bottom Left & Right Wave Blobs -->
+  <svg class="bg-wave-bottom-left" viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M-60 460C-60 280 80 180 220 230C360 280 440 180 480 80L500 460H-60Z" fill="#c4a179"/>
+  </svg>
+
+  <svg class="bg-wave-bottom-right" viewBox="0 0 600 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M120 540C160 340 320 220 440 260C540 290 600 120 640 0L700 540H120Z" fill="#a8cfb7"/>
+  </svg>
+
+  <!-- Top Navigation Bar -->
+  <header class="site-header">
+    <a href="#" class="logo-link">
+      <div class="logo-circle">L</div>
+      <div class="logo-text">LineageOS</div>
+    </a>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="https://github.com/SasmithaAnuhas/LineageOS-23.2-for-Samsung-Galaxy-A80-r1q/releases" target="_blank" rel="noopener">Download</a></li>
+        <li><a href="https://gaminglandlk.blogspot.com/" target="_blank" rel="noopener">Developer</a></li>
+        <li><a href="https://github.com/SasmithaAnuhas/LineageOS-23.2-for-Samsung-Galaxy-A80-r1q" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Landing Section (Strict 1-Screen Desktop Fit) -->
+  <main class="hero-container">
+    <!-- Left Column: Title, Subtitle, 2 Download Buttons -->
+    <div class="hero-left">
+      <div class="device-badge-chip">
+        <span class="dot"></span>
+        <span>Samsung Galaxy A80 (r1q / SM-A805F)</span>
+      </div>
+
+      <h1 class="hero-title">LineageOS for Galaxy A80</h1>
+      
+      <p class="hero-subtitle">
+        Custom aftermarket Android build tailored specifically for the Samsung Galaxy A80. Featuring full 180° motorized rotating camera support, Sound-on-Display piezo audio, and pre-integrated Google Apps.
+      </p>
+
+      <!-- The 2 Buttons: LineageOS 23.2 (Direct Release Link) & LineageOS 24 (Coming Soon) -->
+      <div class="hero-buttons-group">
+        <!-- Button 1: Download LineageOS 23.2 (Direct to your GitHub Releases) -->
+        <a href="https://github.com/SasmithaAnuhas/LineageOS-23.2-for-Samsung-Galaxy-A80-r1q/releases" target="_blank" rel="noopener" class="btn-download-primary">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Download LineageOS 23.2
+        </a>
+
+        <!-- Button 2: LineageOS 24 (Coming Soon) -->
+        <div class="btn-coming-soon" title="LineageOS 24 build is currently in development">
+          <span>LineageOS 24</span>
+          <span class="coming-soon-pill">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Scaled Galaxy A80 Mockup with Authentic Triple Rotating Camera -->
+    <div class="hero-right">
+      <div class="a80-device-container">
+        <!-- Curved Upper Slider Housing (Angel Gold) -->
+        <div class="a80-slider-housing">
+          <!-- Rotating Oval Camera Pill Module -->
+          <div class="a80-camera-pill" title="Samsung Galaxy A80 180° Rotating Triple Camera">
+            <!-- 1. 48MP Main Camera -->
+            <div class="lens-48mp">
+              <div class="lens-glass"></div>
+            </div>
+
+            <!-- 2. 8MP Ultra-Wide Camera -->
+            <div class="lens-ultrawide">
+              <div class="lens-glass"></div>
+            </div>
+
+            <!-- 3. 3D ToF (Time-of-Flight) Depth Camera + Sensor -->
+            <div class="lens-tof-group">
+              <div class="tof-emitter"></div>
+              <div class="tof-receiver"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone Chassis with Pure Bezel-less New Infinity Display -->
+        <div class="a80-body">
+          <div class="a80-display">
+            <!-- Material You Pastel Wallpaper Shapes inside Phone -->
+            <svg class="phone-wallpaper" viewBox="0 0 270 570" fill="none" preserveAspectRatio="none">
+              <path d="M-20 40C30 30 110 90 140 180C170 270 80 340 130 420C180 500 240 520 280 580L-20 580V40Z" fill="#f5df8b" opacity="0.95"/>
+              <path d="M140 320C210 260 280 290 300 360L300 580L120 580C110 500 90 370 140 320Z" fill="#a8cfb7" opacity="0.95"/>
+              <path d="M210 400C260 430 280 480 300 520L300 580L190 580C180 520 170 470 210 400Z" fill="#c4a179" opacity="0.95"/>
+            </svg>
+
+            <!-- A80 New Infinity Screen Content -->
+            <div class="phone-content">
+              <!-- Edge-to-Edge Status Bar -->
+              <div class="phone-status-bar">
+                <span>09:30</span>
+                <span>100% 🔋</span>
+              </div>
+
+              <!-- Stacked Clock -->
+              <div class="phone-clock-widget">
+                <div class="phone-big-time">
+                  09<br>30
+                </div>
+                <div class="phone-date-pill">
+                  <span>Tue, 8 Nov</span>
+                  <span>•</span>
+                  <span>26°C ⛅</span>
+                </div>
+              </div>
+
+              <!-- A80 Hardware Badges -->
+              <div class="a80-screen-indicators">
+                <div class="sod-indicator">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+                  Sound-on-Display Active
+                </div>
+
+                <!-- Optical In-Display Fingerprint Sensor Area -->
+                <div class="fod-sensor-glow" title="Optical In-Display Fingerprint Sensor">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 3"></path>
+                    <path d="M14 13.12c0 2.38 0 6.38-1 8.88"></path>
+                    <path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"></path>
+                    <path d="M2 12a10 10 0 0 1 18-6"></path>
+                    <path d="M2 16h.01"></path>
+                    <path d="M21.8 16c.2-2 .131-5.354 0-6"></path>
+                    <path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"></path>
+                    <path d="M8.65 22c.21-.66.45-1.32.57-2"></path>
+                    <path d="M9 6.8a6 6 0 0 1 9 5.2v2"></path>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Bottom Home Indicator -->
+              <div class="phone-bottom-home">
+                <div class="home-indicator"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bottom Footer -->
+  <footer class="site-footer">
+    <div class="footer-left">
+      <span>&copy; 2026 LineageOS for Galaxy A80 • Ported by <strong>SS Anuhas Fernando</strong></span>
+      <a href="https://github.com/SasmithaAnuhas/LineageOS-23.2-for-Samsung-Galaxy-A80-r1q/blob/main/LICENSE" target="_blank" rel="noopener">Legal</a>
+    </div>
+
+    <!-- Social / Community Icons -->
+    <div class="footer-social-links">
+      <!-- GitHub -->
+      <a href="https://github.com/SasmithaAnuhas/LineageOS-23.2-for-Samsung-Galaxy-A80-r1q" target="_blank" rel="noopener" class="social-btn" aria-label="GitHub Repository" title="GitHub">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+
+      <!-- Telegram -->
+      <a href="https://t.me/" target="_blank" rel="noopener" class="social-btn" aria-label="Telegram Group" title="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      </a>
+
+      <!-- XDA Forums -->
+      <a href="https://xdaforums.com/" target="_blank" rel="noopener" class="social-btn" aria-label="XDA Developers Forum" title="XDA Developers">
+        <svg viewBox="0 0 24 24"><path d="M1.5 5.5h4.8l2.9 5.3-2.9 5.3H1.5l2.9-5.3L1.5 5.5zm11.2 0h4.8l2.9 5.3-2.9 5.3h-4.8l2.9-5.3-2.9-5.3zM10 2.5h4v19h-4v-19z"/></svg>
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>
